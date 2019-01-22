@@ -1,0 +1,14 @@
+#files not to be versioned
+
+*.out
+*.blg
+*.toc
+*.log
+*.aux
+*.bbl
+*.bcf
+*.run.xml
+*.synctex*
+*.fls
+*latexmk
+tesi.pdf

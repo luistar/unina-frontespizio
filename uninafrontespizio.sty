@@ -1,0 +1,194 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{uninafrontespizio}[2018/07/24 UniNA Frontespizio Package]
+ 
+\RequirePackage{setspace}
+\RequirePackage{etoolbox}
+\RequirePackage{tikz}
+\usetikzlibrary{backgrounds}
+
+% Spacing commands
+
+% Flags, counters
+\def\@relatorilist{}
+\def\@correlatorilist{}
+
+% logo positioning options
+\def\@topPosition{top}
+\def\@belowUniPosition{below-uni}
+\def\@aboveTitlePosition{above-title}
+\def\@belowTitlePosition{below-title}
+\def\@noLogo{no-logo}
+
+% Helper commands
+\newcommand{\countlist}[1]{%
+  \setcounter{listcount}{0}% Reset listcount counter
+  \renewcommand*{\do}[1]{\stepcounter{listcount}}% At each item, step listcount
+  \docsvlist{#1}% Process list
+}
+
+\newcommand{\myprintlist}[1]{%
+    \count255=0
+    \def\do##1{\advance\count255 1 \chardef\finalitem=\count255 }%
+    \dolistloop{#1}%
+    \count255=0
+    \def\do##1{\advance\count255 1
+    \ifnum\count255=\finalitem
+        \ifnum\count255>1
+            \\
+        \fi
+    \else
+        \ifnum\count255=1
+        \else
+            \\
+        \fi
+    \fi##1}
+    \dolistloop{#1}
+}
+
+\newcommand{\printcandidateblock}[1]{%
+        \hfill
+        \@Candidato\\
+        \hbox{}\hfill{\scshape\@Matricola}
+}
+
+\newcommand{\ifstrequals}[4]{
+    \def\firstOperand{#1}
+    \def\secondOperand{#2}
+    \ifx\firstOperand\secondOperand%
+        #3%
+    \else%
+        #4%
+    \fi
+}
+
+% Public commands
+
+% content
+\newcommand{\Universita}[1]{\newcommand{\@Universita}{#1}}
+\newcommand{\Facolta}[1]{\newcommand{\@Facolta}{#1}}
+\newcommand{\Dipartimento}[1]{\newcommand{\@Dipartimento}{#1}}
+\newcommand{\CorsoDiLaurea}[1]{\newcommand{\@CorsoDiLaurea}{#1}}
+\newcommand{\AnnoAccademico}[1]{\newcommand{\@AnnoAccademico}{#1}}
+\newcommand{\Logo}[1]{\newcommand{\@Logo}{#1}}
+\newcommand{\Relatore}[1]{\listadd{\@relatorilist}{#1}}
+\newcommand{\Correlatore}[1]{\listadd{\@correlatorilist}{#1}}
+
+\newcommand{\@Candidato}{}
+\newcommand{\Candidato}[1]{\renewcommand{\@Candidato}{#1}}
+
+\newcommand{\@Titolo}{}
+\newcommand{\Titolo}[1]{\renewcommand{\@Titolo}{#1}}
+
+\newcommand{\Matricola}[1]{\newcommand{\@Matricola}{#1}}
+
+%\newcommand{\@Materia}{}
+\newcommand{\Materia}[1]{\def\@Materia{#1}}
+
+\newcommand{\FrontespizioAlt}[1]{\newcommand{\@FrontespizioAlt}{#1}}
+
+\newcommand{\@LogoPosition}{top}
+\newcommand{\LogoPosition}[1]{%
+    \renewcommand{\@LogoPosition}{#1}%
+}%
+
+% labels and text
+\newcommand{\@RelatoreLabel}{Relatore} %default value
+\newcommand{\RelatoreLabel}[1]{\renewcommand{\@RelatoreLabel}{#1}}
+
+\newcommand{\@CorrelatoreLabel}{Correlatore} %default value
+\newcommand{\CorrelatoreLabel}[1]{\renewcommand{\@CorrelatoreLabel}{#1}}
+
+\newcommand{\@CandidatoLabel}{Candidato} %default value
+\newcommand{\CandidatoLabel}[1]{\renewcommand{\@CandidatoLabel}{#1}}
+
+% spacing and sizes
+\newcommand{\@LogoWidth}{3cm}
+\newcommand{\LogoWidth}[1]{\renewcommand{\@LogoWidth}{#1}}
+
+\newcommand{\@relandcorrelsep}{1.5ex}
+\newcommand{\relandcorrelsep}[1]{\renewcommand{\@relandcorrelsep}{#1}}
+
+\newcommand{\@LogoBackground}{%
+    \begin{tikzpicture}[remember picture, overlay]%
+        \coordinate (cent) at (current page.center)+(.5cm,0cm);%
+        \draw node[opacity=.08] at (cent) {\hspace{.5cm}\includegraphics[width=1.2\linewidth]{\@Logo}};
+    \end{tikzpicture}%
+}
+
+\newcommand{\makefrontpage}{%
+    \begin{titlepage}%
+        \begin{center}
+            \setstretch{1.2}
+            \setlength{\parskip}{2ex}
+            \ifdefined\@FrontespizioAlt \else
+                \ifdefstrequal{\@LogoPosition}{\@topPosition}{\includegraphics[width=\@LogoWidth]{\@Logo}}{}
+            \fi
+
+            \ifdefined\@Universita
+                {\Large\textsc{\@Universita}}
+            \fi
+
+            \ifdefined\@FrontespizioAlt \else
+                \ifdefstrequal{\@LogoPosition}{\@belowUniPosition}{\includegraphics[width=\@LogoWidth]{\@Logo}}{}
+            \fi
+
+            \ifdefined\@Facolta
+                {\Large\textsc{\@Facolta}}
+            \fi
+
+            \ifdefined\@Dipartimento
+                {\large\textsc{\@Dipartimento}}
+            \fi
+
+            \ifdefined\@CorsoDiLaurea
+                {\large\textsc{\@CorsoDiLaurea}}
+            \fi
+
+            \ifdefined\@Materia
+                {\large\textsc{\@Materia}}
+            \fi
+
+            \vfill
+            \ifdefined\@FrontespizioAlt \else
+                \ifdefstrequal{\@LogoPosition}{\@aboveTitlePosition}{\includegraphics[width=\@LogoWidth]{\@Logo}}{}
+            \fi
+
+            \vfill
+            \setstretch{2}
+            {\Huge\textsc{\@Titolo}}
+            \vfill
+            \ifdefined\@FrontespizioAlt \else
+                \ifdefstrequal{\@LogoPosition}{\@belowTitlePosition}{\includegraphics[width=\@LogoWidth]{\@Logo}}{}
+            \fi
+            \vfill
+            \setstretch{1}
+            \begin{minipage}[t]{.49\textwidth}
+                \large
+
+                \textbf{\@RelatoreLabel}\par
+                \myprintlist{\@relatorilist} 
+
+                \vspace{\@relandcorrelsep}
+                \textbf{\@CorrelatoreLabel}\par
+                \myprintlist{\@correlatorilist}
+            \end{minipage}\hfill%
+            \begin{minipage}[t]{.45\textwidth}
+                \large
+                \hfill\textbf{\@CandidatoLabel}\par
+                \printcandidateblock{\@Candidato}%
+            \end{minipage}%
+            %\vspace{2ex}
+            \vfill
+            \ifdefined\@AnnoAccademico{\large \@AnnoAccademico}\fi
+            \ifdefined\@FrontespizioAlt%
+            \@LogoBackground%
+            \fi%
+        \end{center}
+    \end{titlepage}
+}
+
+\newcommand{\makefrontpagealt}{
+    \FrontespizioAlt{}
+    \makefrontpage%
+    \undef\@FrontespizioAlt
+}

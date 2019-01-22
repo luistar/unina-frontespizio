@@ -1,0 +1,41 @@
+\documentclass{book}
+\usepackage[margin=3cm]{geometry}
+
+% STEP 1: include the package
+\usepackage{uninafrontespizio}
+
+% STEP 2: Front-page configuration
+\Universita{Università degli Studi di Napoli Federico II}
+\Facolta{Scuola Politecnica e delle Scienze di Base}
+\Dipartimento{Dipartimento di Ingegneria Elettrica e Tecnologie dell'Informazione}
+\CorsoDiLaurea{Corso di Laurea Magistrale in Informatica}
+\Materia{Tesi di Laurea in Hacky Typesetting} % optional
+\AnnoAccademico{Anno Accademico 2017--2018}
+\Titolo{A modest package to obtain decent-looking front-pages for your theses with minimal effort}
+\Relatore{Professor Guidobaldo Maria \textsc{Riccardelli}}
+\Relatore{Duca Conte Pier Carlo Ing. \textsc{Semenzara}}
+\Relatore{Marchese Conte Piermatteo \textsc{Barambani}}
+% can add as many "Relatori" as you wish
+\RelatoreLabel{Relatori} %optional, default: Relatore
+%\relandcorrelsep{2em} %optional, vertical space between relatori and correlatori default: 1.5ex
+\Correlatore{Dott. Ing. Visconte \textsc{Cobram}}
+%\Correlatore{Dott.Foo \textsc{Bar}} % can add as many "Correlatori" as you wish
+%\CorrelatoreLabel{Controrelatore} %optional, default: Correlatore
+\Candidato{John \textsc{Doe}} %only one candidate is currently supported
+%\CandidatoLabel{Candidata} %optional, default: Candidato
+\Matricola{N97/999}
+\Logo{logo-federico-II.pdf} %path to logo image
+\LogoWidth{3.5cm} %optional, default: 3cm
+\LogoPosition{below-uni} % or top, or below-title, or above-title, or no-logo
+
+\begin{document}
+    % STEP 3: use \makefrontpage and/or \makefrontpagealt
+    \pagestyle{empty}
+    \makefrontpage%
+    \makefrontpagealt
+    \pagestyle{headings}
+    \tableofcontents
+    \chapter{Foo}
+    \section{Bar}
+    Lorem ipsum..
+\end{document}
