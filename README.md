@@ -1,6 +1,13 @@
 # unina-frontespizio
 A modest, unofficial LaTeX package to obtain decent-looking front-pages for your theses (@ UniNA) with minimal effort.
+See [example.pdf](example.pdf) for a sample.
 ![Screenshot](screen.png)
+
+## Features
+
+* High quality "Federico II" vectorial logo included;
+* Two styles (I recommend the classic one for the cover and the alternative one for the inner cover);
+* UniNA guidelines compliant.
 
 ## Getting Started
 
@@ -36,6 +43,8 @@ directory tree (refer to your distro's documentation). Alternatively, just copy 
 \LogoPosition{below-uni} % or top, or below-title, or above-title, or no-logo
 ```
 4. Generate front pages by using `\makefrontpage` (classic style) and/or `\makefrontpagealt` (alternative style)
+
+For an example, see the `example.tex` file.
 
 ## License
 
