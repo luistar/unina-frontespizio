@@ -1,5 +1,6 @@
 # unina-frontespizio
 A modest, unofficial LaTeX package to obtain decent-looking front-pages for your theses (@ UniNA) with minimal effort.
+![Screenshot](screen.png)
 
 ## Getting Started
 
