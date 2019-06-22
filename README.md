@@ -15,7 +15,7 @@ See [example.pdf](example.pdf) for a sample.
 directory tree (refer to your distro's documentation). Alternatively, just copy the package file to your LaTeX project's root.
 2. Include the `uninafrontespizio` package in your document's preamble as follows.
 ``` latex
-\includepackage{uninafrontespizio}
+\usepackage{uninafrontespizio}
 ```
 3. Customize your frontpage:
 ``` latex
