@@ -12,8 +12,8 @@ See [example.pdf](example.pdf) for a sample.
 ## Getting Started
 
 1. Install the package by copying `uninafrontespizio.sty` to the `uninafrontespizio` directory inside your local `texmf`
-directory tree (refer to your distro's documentation). Alternatively, just copy the package file to your LaTeX project's root.
-2. Include the `uninafrontespizio` package in your document's preamble as follows.
+directory tree (refer to your distro's documentation). Alternatively, just copy the package file to your LaTeX project root.
+2. Include the `uninafrontespizio` package in your document preamble as follows.
 ``` latex
 \usepackage{uninafrontespizio}
 ```
